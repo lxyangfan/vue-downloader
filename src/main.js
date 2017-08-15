@@ -9,13 +9,15 @@ requirejs.config({
     paths: {
         npm: '../node_modules',
         vue: '../node_modules/vue/dist/vue.min',
+        router: '../node_modules/vue-router/dist/vue-router.min',
+        home: './home/home.component',
+        downloader: './downloader/downloader.component'
     }
 });
 
 // Start the main app logic.
 requirejs(['vue', 'app'],
-function   (vue, app) {
-    console.log("启动vue！");
-    app;
-    
-});
+    function (vue, app) {
+        app.run();
+        console.log("启动vue！");
+    });

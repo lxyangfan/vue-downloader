@@ -1,14 +1,36 @@
-define('app',[
+define('app', [
     'require',
-    'vue'
-], function(require, vue) {
+    'vue',
+    'router',
+    'home'
+], function (require, vue, router, home) {
     'use strict';
     var Vue = require('vue');
-    var app = new Vue({
-        el: '#app',
-        data: {
-            message: 'Hello Vue'
-        }
+    var homeComponent = require('home').register();
+    var VueRouter = require('router');
+    Vue.use(VueRouter);
+
+    var TestComp = {
+        template: '<div>TEST ROUTE </div>'
+    };
+    var routes = [
+        { path: '/', component: homeComponent },
+        { path: '/home', component: homeComponent },
+        { path: '/test', component: TestComp }
+    ];
+
+    var vueRouter = new VueRouter({
+        routes
     });
-    return app;
+
+    return {
+        run: function () {
+            var app = new Vue({
+                router: vueRouter,
+                data: {
+                    message: 'Hello Vue'
+                }
+            }).$mount('#app');
+        }
+    };
 });

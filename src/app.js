@@ -1,26 +1,31 @@
 define('app', [
     'require',
     'vue',
+    'vuer',
     'lodash',
     'router',
     'home',
-    'notfound'
-], function (require, vue, _,  router, home, notfound) {
+    'notfound',
+    'api'
+], function (require, vue, vuer, _,  router, home, notfound, api) {
     'use strict';
     var Vue = require('vue');
+    var Vue_Resouce = require('vuer');
     var VueRouter = require('router');
     var homeComponent = require('home').register();
     var notFoundComponent = require('notfound').register();
+    var apiConf = require('api');
 
 
     Vue.use(VueRouter);
+    Vue.use(Vue_Resouce);
 
     var _404Page = {
         template: '<div>找不到页面 404 </div>'
     };
     var routes = [
         { path: '/home/:uuid', component: homeComponent },
-        { path: '/', component: _404Page },
+        { path: '/', component: homeComponent, props: true },
         { path: '*', component: _404Page }
     ];
 
@@ -34,13 +39,12 @@ define('app', [
             var app = new Vue({
                 router: vueRouter,
                 data: {
-                    message: 'Hello Vue'
+                    functionId: null,
+                    inputs: null
                 },
                 mounted: function () {
-                    if (!_.isEmpty(this.$route.params.uuid)) {
-                        console.log('输入了UUID： '+ this.$route.params.uuid);
-                        this.$http.post();
-                    }
+                    console.log('状态：mounted');
+                    
                 }
 
             }).$mount('#app');

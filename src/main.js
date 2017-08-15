@@ -10,9 +10,11 @@ requirejs.config({
         npm: '../node_modules',
         vue: '../node_modules/vue/dist/vue.min',
         router: '../node_modules/vue-router/dist/vue-router.min',
+        vuer:   '../node_modules/vue-resource/dist/vue-resource.min',
         home: './home/home.component',
         downloader: './downloader/downloader.component',
-        notfound: './not-found/not-found.component'
+        notfound: './not-found/not-found.component',
+        api: './asset/api'
     },
     packages : [{ 
         name : "lodash",

@@ -6,7 +6,7 @@ define('downloader', [
     var Vue = require('vue');
     var downloader = Vue.component('downloader-component', {
         template: '<div>    \
-                        <input type="button" value="查询" />  \
+                        <input type="button" value="开始导出" />  \
                    <div>'
     });
     return {

@@ -11,8 +11,14 @@ requirejs.config({
         vue: '../node_modules/vue/dist/vue.min',
         router: '../node_modules/vue-router/dist/vue-router.min',
         home: './home/home.component',
-        downloader: './downloader/downloader.component'
-    }
+        downloader: './downloader/downloader.component',
+        notfound: './not-found/not-found.component'
+    },
+    packages : [{ 
+        name : "lodash",
+        location : "../node_modules/lodash/",
+        main : "lodash.min"
+    }]
 });
 
 // Start the main app logic.

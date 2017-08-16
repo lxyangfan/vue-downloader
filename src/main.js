@@ -24,10 +24,18 @@ requirejs.config({
 });
 
 // Start the main app logic.
-requirejs(['app', 'jquery'],
-    function (app, $) {
-        $(document).ready(function () {
+requirejs(['app', 'jquery', 'api', 'lodash'],
+    function (app, $, api, _) {
+        var params = api.getQueryParam(window.location.href);
+        var functionId = params['functionId'];
+        var inputs = {};
+        for (var item in params) {
+            if (params.hasOwnProperty(item) && !_.isEmpty(params[item]) && !_.isEqual(item, "functionId")) {
+                inputs[item] = params[item];
+            }
+        }
 
-            app.run();
+        $(document).ready(function () {
+            $('#btnExportExcel').on('click', { functionId: functionId, inputs: inputs }, app.onBtnClick);
         });
     });

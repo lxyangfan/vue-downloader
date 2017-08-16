@@ -1,11 +1,10 @@
 define('downloader', [
     'require',
-    'vue',
     'api',
-    'httphandler'
-], function (require, vue, api, httphandler) {
+    'httphandler',
+    'jquery'
+], function (require,  api, httphandler, $) {
     'use strict';
-    var Vue = require('vue');
     var apiConf = require('api')['dev'];
     var toQueryUrl = require('api')['toQueryUrl'];
     var handler = httphandler['handleResp'];

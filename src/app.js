@@ -1,4 +1,4 @@
-define('app', [
+define([
     'require',
     'lodash',
     'api',

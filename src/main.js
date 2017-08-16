@@ -7,7 +7,6 @@ requirejs.config({
     //never includes a ".js" extension since
     //the paths config could be for a directory.
     paths: {
-        npm: '../node_modules',
         vue: '../node_modules/vue/dist/vue.min',
         router: '../node_modules/vue-router/dist/vue-router.min',
         vuer: '../node_modules/vue-resource/dist/vue-resource.min',

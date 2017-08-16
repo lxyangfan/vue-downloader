@@ -1,20 +1,17 @@
-define('app', [
+define([
     'require',
     'vue',
     'vuer',
-    'lodash',
     'router',
     'home',
-    'notfound',
-    'api'
-], function (require, vue, vuer, _,  router, home, notfound, api) {
+    'notfound'
+], function (require, vue, vuer, router, home, notfound) {
     'use strict';
     var Vue = require('vue');
     var Vue_Resouce = require('vuer');
     var VueRouter = require('router');
     var homeComponent = require('home').register();
     var notFoundComponent = require('notfound').register();
-    var apiConf = require('api');
 
 
     Vue.use(VueRouter);
@@ -30,13 +27,13 @@ define('app', [
     ];
 
     var vueRouter = new VueRouter({
-        routes,
+        routes: routes,
         mode: 'hash'
     });
 
     return {
         run: function () {
-            var app = new Vue({
+            return new Vue({
                 router: vueRouter,
                 data: {
                     functionId: null,

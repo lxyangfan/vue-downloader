@@ -7,7 +7,6 @@ define('home', [
 ], function (require, vue, _, downloader, api) {
     'use strict';
     var Vue = require('vue');
-    var apiConf = require('api');
 
     var downloaderComponent = require('downloader');
     var homeComponent = Vue.component('home-component', {
@@ -20,7 +19,7 @@ define('home', [
                             {{ key }} : {{value}}     \
                             </li>               \
                     </ul> \
-                    <downloader-component> </downloader-component>  \
+                    <downloader-component :uuid="uuid" :function-id="functionId" :inputs="inputs" > </downloader-component>  \
                   </div>',
         props: ['uuid', 'functionId', 'inputs'],
         mounted: function () {
@@ -36,7 +35,6 @@ define('home', [
                     }
                 }
                 console.log(this.inputs);
-                this.requestExcel();
             }
         },
         watch: {
@@ -48,26 +46,6 @@ define('home', [
             }
         },
         methods: {
-            requestExcel: function () {
-                var req = {
-                    functionId: this.functionId,
-                    inputs: this.inputs,
-                    transCode: 'excelExport'
-                };
-                var vm = this;
-                vm.$http.post(apiConf.url + 'excel/', req).then(function (resp) {
-                    console.log("收到回复");
-                    console.log(resp['body']);
-                });
-            },
-            getExcelExportStatus: function (uuid) {
-                var url = apiConf.url + 'excel/' + uuid;
-                var vm = this;
-                vm.$http.get(url).then(function (resp) {
-                    console.log("收到excel的信息");
-                    console.log(resp);
-                });
-            }
         }
 
     });

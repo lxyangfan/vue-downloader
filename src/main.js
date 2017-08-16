@@ -14,7 +14,9 @@ requirejs.config({
         home: './home/home.component',
         downloader: './downloader/downloader.component',
         notfound: './not-found/not-found.component',
-        api: './asset/api'
+        api: './asset/api',
+        httphandler: './http-handler/http-handler',
+        app: './app' 
     },
     packages : [{ 
         name : "lodash",
@@ -24,8 +26,7 @@ requirejs.config({
 });
 
 // Start the main app logic.
-requirejs(['vue', 'app'],
-    function (vue, app) {
+requirejs(['require', 'vue', 'app'],
+    function (require, vue, app) {
         app.run();
-        console.log("启动vue！");
-    });
+});

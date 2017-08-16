@@ -12,42 +12,39 @@ define('home', [
     var homeComponent = Vue.component('home-component', {
         template: '<div>    \
                     功能号functionId: {{ functionId }}            \
-                    传入的输入值uuid: {{ uuid }}            \
                     输入参数：\
                     <ul> \
                         <li v-for="(value, key) in inputs"> \
                             {{ key }} : {{value}}     \
                             </li>               \
                     </ul> \
-                    <downloader-component :uuid="uuid" :function-id="functionId" :inputs="inputs" > </downloader-component>  \
+                    <downloader-component :function-id="functionId" :inputs="inputs" > </downloader-component>  \
                   </div>',
-        props: ['uuid', 'functionId', 'inputs'],
+        props: ['functionId', 'inputs'],
         mounted: function () {
-            console.log('在子控件homeComponent中');
-            if (!_.isEmpty(this.$route.query)) {
-
-                var params = this.$route.query;
-                this.functionId = params.functionId;
-                this.inputs = {};
-                for (var item in params) {
-                    if (params.hasOwnProperty(item) && !_.isEmpty(params[item]) && !_.isEqual(item, "functionId")) {
-                        this.inputs[item] = params[item];
-                    }
-                }
-                console.log(this.inputs);
-            }
+            // 从url中获取参数值，包括functionId、输入参数
+            this.updateParams();
         },
         watch: {
             $route: function (to, from) {
                 // 每当URL改变的时候更新uuid
-                if (!_.isEmpty(this.$route.params.uuid)) {
-                    this.uuid = this.$route.params.uuid;
-                }
+                this.updateParams();
             }
         },
         methods: {
+            updateParams: function () {
+                if (!_.isEmpty(this.$route.query)) {
+                    var params = this.$route.query;
+                    this.functionId = params.functionId;
+                    this.inputs = {};
+                    for (var item in params) {
+                        if (params.hasOwnProperty(item) && !_.isEmpty(params[item]) && !_.isEqual(item, "functionId")) {
+                            this.inputs[item] = params[item];
+                        }
+                    }
+                }
+            }
         }
-
     });
     return {
         register: function () {

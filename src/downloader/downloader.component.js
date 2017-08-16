@@ -13,21 +13,29 @@ define('downloader', [
 
     var downloader = Vue.component('downloader-component', {
         template: '<div>    \
-                        <input v-on:click="requestExcel" type="button" value="开始导出"  />  \
                         funcId: {{functionId}}, uuid: {{uuid}} \
-                        <template v-if="downloadLink !== null">        \
-                            <a :href="downloadLink" target="_blank">点击下载</a>              \
+                        <template v-if="exportClicked === 0">        \
+                            <input v-on:click="requestExcel" type="button" value="开始导出"  />  \
+                        </template> \
+                        <template v-if="exportClicked === 1">        \
+                            excel文件正在生成，请稍后...             \
+                        </template>  \
+                        <template v-if="exportClicked === 2">        \
+                            excel文件已经生成，<a :href="downloadLink" target="_blank">点击下载</a>              \
                         </template>                 \
                    <div>',
-        props: ['uuid', 'functionId', 'inputs'],
+        props: ['functionId', 'inputs'],
         data: function() {
             return {
-                downloadLink: null
+                uuid: null,
+                downloadLink: null,
+                exportClicked: 0
             };
         },
         methods: {
             requestExcel: function () {
-                console.log('开始导出...');
+                this.exportClicked = 1;
+
                 var req = {
                     functionId: this.functionId,
                     inputs: this.inputs,
@@ -41,7 +49,6 @@ define('downloader', [
                         if (_.isEmpty(body['uuid']))
                             throw new Error('后台服务处理失败，返回无效uuid!');
                         this.uuid = body['uuid'];
-                        console.log(body);
                     } catch (e) {
                         alert(e);
                     }
@@ -75,7 +82,7 @@ define('downloader', [
                                 uuid: this.uuid
                             };
                             this.downloadLink = apiConf.download +  toQueryUrl(params);
-                            console.log('生成excel成功，可以下载...'+ this.downloadLink);
+                            this.exportClicked = 2;
                             clearInterval(cancelCheck);
                         }
                     } catch (e) {

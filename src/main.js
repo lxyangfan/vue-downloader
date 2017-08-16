@@ -7,7 +7,6 @@ requirejs.config({
     //never includes a ".js" extension since
     //the paths config could be for a directory.
     paths: {
-        npm: '../node_modules',
         vue: '../node_modules/vue/dist/vue.min',
         router: '../node_modules/vue-router/dist/vue-router.min',
         vuer:   '../node_modules/vue-resource/dist/vue-resource.min',
@@ -16,12 +15,12 @@ requirejs.config({
         notfound: './not-found/not-found.component',
         api: './asset/api',
         httphandler: './http-handler/http-handler',
-        app: './app' 
+        app: './app'
     },
-    packages : [{ 
-        name : "lodash",
-        location : "../node_modules/lodash/",
-        main : "lodash.min"
+    packages: [{
+        name: "lodash",
+        location: "../node_modules/lodash/",
+        main: "lodash.min"
     }]
 });
 
@@ -29,4 +28,4 @@ requirejs.config({
 requirejs(['require', 'vue', 'app'],
     function (require, vue, app) {
         app.run();
-});
+    });

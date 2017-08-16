@@ -7,13 +7,22 @@
 <body>
 
     <div id="app">
-        <!-- 路由出口 -->
-        <!-- 路由匹配到的组件将渲染在这里 -->
-        <router-view></router-view>
+        <!-- 显示输入参数信息 -->
+        <div id="info">
+            <div id="functionId"></div>
+            <ul id="params">
+            </ul>
+        </div>
+        <!-- 根据数据显示对应的操作 -->
+        <div id="operations">
+            <div id="message"></div>
+            <input type="button" id="btnExportExcel" value="开始导出" />
+            <div id="download" style="display:none">
+                <a href="#" id="link" target="_blank"></a>
+            </div>
+        </div>
     </div>
 
 </body>
-
 <script data-main="src/main.js" src="node_modules/requirejs/require.js"></script>
-
 </html>

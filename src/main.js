@@ -10,22 +10,25 @@ requirejs.config({
         npm: '../node_modules',
         vue: '../node_modules/vue/dist/vue.min',
         router: '../node_modules/vue-router/dist/vue-router.min',
-        vuer:   '../node_modules/vue-resource/dist/vue-resource.min',
+        vuer: '../node_modules/vue-resource/dist/vue-resource.min',
         home: './home/home.component',
         downloader: './downloader/downloader.component',
         notfound: './not-found/not-found.component',
-        api: './asset/api'
+        api: './asset/api',
+        jquery: '../node_modules/jquery/dist/jquery.min'
     },
-    packages : [{ 
-        name : "lodash",
-        location : "../node_modules/lodash/",
-        main : "lodash.min"
+    packages: [{
+        name: "lodash",
+        location: "../node_modules/lodash/",
+        main: "lodash.min"
     }]
 });
 
 // Start the main app logic.
-requirejs(['vue', 'app'],
-    function (vue, app) {
-        app.run();
-        console.log("启动vue！");
+requirejs(['app', 'jquery'],
+    function (app, $) {
+        $(document).ready(function () {
+
+            app.run();
+        });
     });

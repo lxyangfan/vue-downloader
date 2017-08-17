@@ -6,7 +6,7 @@ define([
 ], function (require,  _,  api, $) {
     'use strict';
 
-    var url = api['mock']['url'];
+    var url = api['dev']['url'];
 
     var onBtnClick = function(event) {
         var req = {

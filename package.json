@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --display-error-details --config webpack.conf.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jquery": "1.9.x",
-    "lodash": "3.10.1",
-    "requirejs": "^2.3.4"
+    "jquery": "^3.2.1",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "webpack": "^3.5.5"
   }
 }

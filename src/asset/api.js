@@ -1,7 +1,6 @@
 define('api', [
     'require',
-    'lodash'
-], function (require, _) {
+], function (require) {
     'use strict';
 
     return {

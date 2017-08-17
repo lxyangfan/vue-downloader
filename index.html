@@ -12,17 +12,18 @@
             <div id="functionId"></div>
             <ul id="params">
             </ul>
+            <div id="uuid"> </div>
         </div>
         <!-- 根据数据显示对应的操作 -->
         <div id="operations">
             <div id="message"></div>
             <input type="button" id="btnExportExcel" value="开始导出" />
             <div id="download" style="display:none">
-                <a href="#" id="link" target="_blank"></a>
+                <a href="#" id="download-link" target="_blank"></a>
             </div>
         </div>
     </div>
 
+    <script data-main="src/main.js" src="node_modules/requirejs/require.js"></script>
 </body>
-<script data-main="src/main.js" src="node_modules/requirejs/require.js"></script>
 </html>

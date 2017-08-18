@@ -1,11 +1,12 @@
 import $ from 'jquery';
 import { getAsyncReqParam, getDownloadLink } from './service/excel';
 import { toQueryUrl, getQueryParam, post } from './utils/network';
-import {api} from './asset/api';
+import { api } from './asset/api';
 
 var asyncRequest = getAsyncReqParam();
 var uuid = null;
 var cleanIntervalFlag = null;
+
 var onBtnClick = function (event) {
     var req = event.data;
     post(req, function (data) {
@@ -15,6 +16,9 @@ var onBtnClick = function (event) {
         uuid = data.uuid;
         // 凭此uuid，开始轮训，是否生成excel完毕
         cleanIntervalFlag = setInterval(queryStatus, 1000);
+    }, function (err) {
+        cleanMsg();
+        $('#message').text('请求导出excel出错，错误信息' + err);
     });
 }
 
@@ -39,6 +43,10 @@ var queryStatus = function () {
             $('#download-link').text('点击下载文件');
             clearInterval(cleanIntervalFlag);
         }
+    }, function (err) {
+        cleanMsg();
+        clearInterval(cleanIntervalFlag);
+        $('#message').text('服务器生成excel失败：错误信息' + err);
     });
 }
 

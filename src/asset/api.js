@@ -4,8 +4,8 @@ var api = {
         url: 'http://5992e2d92b160100110b6b0f.mockapi.io/api/excel'
     },
     dev: {
-        url: 'http://localhost:8090/ks-main/newService/standard/json',
-        download: 'http://localhost:8090/ks-main/newService/downLoad'
+        url: '/ks-main/newService/standard/json',
+        download: '/ks-main/newService/downLoad'
     }
 };
 

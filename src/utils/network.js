@@ -2,7 +2,7 @@ import $ from 'jquery';
 import {api} from '../asset/api';
 
 var url = api['dev']['url'];
-var post = function (req, callback) {
+var post = function (req, callback, errCallback) {
     $.ajax({
         method: 'POST',
         url: url + '?_t=' + (new Date).getTime(),
@@ -14,7 +14,8 @@ var post = function (req, callback) {
                 body = handleResp(resp);
                 callback(body);
             } catch (e) {
-                alert(e);
+                console.warn(e);
+                errCallback(e);
             }
         },
         failed: function (err) {

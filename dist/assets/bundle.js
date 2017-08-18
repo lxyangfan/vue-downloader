@@ -75,8 +75,8 @@ var api = {
         url: 'http://5992e2d92b160100110b6b0f.mockapi.io/api/excel'
     },
     dev: {
-        url: 'http://localhost:8090/ks-main/newService/standard/json',
-        download: 'http://localhost:8090/ks-main/newService/downLoad'
+        url: '/ks-main/newService/standard/json',
+        download: '/ks-main/newService/downLoad'
     }
 };
 
@@ -108,7 +108,7 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 
 
 var url = __WEBPACK_IMPORTED_MODULE_1__asset_api__["a" /* api */]['dev']['url'];
-var post = function (req, callback) {
+var post = function (req, callback, errCallback) {
     __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.ajax({
         method: 'POST',
         url: url + '?_t=' + (new Date).getTime(),
@@ -120,7 +120,8 @@ var post = function (req, callback) {
                 body = handleResp(resp);
                 callback(body);
             } catch (e) {
-                alert(e);
+                console.warn(e);
+                errCallback(e);
             }
         },
         failed: function (err) {
@@ -199,6 +200,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var asyncRequest = Object(__WEBPACK_IMPORTED_MODULE_1__service_excel__["a" /* getAsyncReqParam */])();
 var uuid = null;
 var cleanIntervalFlag = null;
+
 var onBtnClick = function (event) {
     var req = event.data;
     Object(__WEBPACK_IMPORTED_MODULE_2__utils_network__["b" /* post */])(req, function (data) {
@@ -208,6 +210,9 @@ var onBtnClick = function (event) {
         uuid = data.uuid;
         // 凭此uuid，开始轮训，是否生成excel完毕
         cleanIntervalFlag = setInterval(queryStatus, 1000);
+    }, function (err) {
+        cleanMsg();
+        __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#message').text('请求导出excel出错，错误信息' + err);
     });
 }
 
@@ -232,6 +237,10 @@ var queryStatus = function () {
             __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#download-link').text('点击下载文件');
             clearInterval(cleanIntervalFlag);
         }
+    }, function (err) {
+        cleanMsg();
+        clearInterval(cleanIntervalFlag);
+        __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#message').text('服务器生成excel失败：错误信息' + err);
     });
 }
 

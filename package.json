@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --display-error-details --config webpack.conf.js"
+    "build": "webpack --display-error-details --watch --config webpack.conf.js",
+    "start": "webpack-dev-server --open --port 8092 --config webpack.conf.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +15,7 @@
     "lodash": "^4.17.4"
   },
   "devDependencies": {
-    "webpack": "^3.5.5"
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.7.1"
   }
 }

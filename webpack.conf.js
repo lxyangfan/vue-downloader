@@ -12,5 +12,9 @@ module.exports = {
             jquery: path.resolve(__dirname, 'node_modules/jquery/dist/jquery.min')
         },
         modules: ['node_modules']
-    }
+    },
+    devServer: {
+        contentBase: './dist'
+    },
+    devtool: 'inline-source-map'
 }

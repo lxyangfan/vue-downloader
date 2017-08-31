@@ -48,28 +48,34 @@ var toQueryUrl = function (params) {
  * @param {string} url 完整的url
  * @return {object} 参数对象
  */
-var getQueryParam = function (url) {
-    var index = url.indexOf('?');
-    var params = null;
-    if (-1 !== index) {
-        params = url.substring(index + 1);
-    }
+var getQueryParam = function(url) {
+	var index = url.indexOf('?');
+	var params = null;
+	if (-1 !== index) {
+		params = url.substring(index + 1);
+	}
 
-    var map = {};
-    if (!_.isEmpty(params)) {
-        map = {};
-        var paramList = params.split('&');
-        var ptStr = '(.+)=(.*)';
-        var pt = new RegExp(ptStr, 'g');
-        for (var i = 0; i < paramList.length; i++) {
-            var param = paramList[i];
-            var res = null;
-            while (res = pt.exec(param)) {
-                map[res[1]] = res[2];
-            }
-        }
-    }
-    return map;
+	var map = {};
+	if (!_.isEmpty(params)) {
+		map = {};
+		var paramList = params.split('&');
+		var ptStr = '(.+)=(.*)';
+		var pt = new RegExp(ptStr, 'g');
+		if (paramList.length > 0) {
+			for (var i = 0; i < paramList.length; i++) {
+				var param = paramList[i];
+				var res = null;
+				while (res = pt.exec(param)) {
+					map[res[1]] = res[2];
+				}
+			}
+		} else {
+			while (res = pt.exec(paramList[0])) {
+				map[res[1]] = res[2];
+			}
+		}
+	}
+	return map;
 }
 
 export {

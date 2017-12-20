@@ -25,7 +25,7 @@ var onBtnClick = function (event) {
 var queryStatus = function () {
     var req = {
         uuid: uuid,
-        transCode: 'excelExportStatus'
+        transCode: 'excel.excelExportStatus'
     }
     post(req, function (data) {
         var body = data['TbExcelExportStatusEObj'];
